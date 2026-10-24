@@ -52,7 +52,7 @@ Your answers go into the URL, so "here is what applies to *us*" is one copied li
 
 **4. [What moved, and when](/changes.html).** Every date that changed after publication, with the instrument that changed it and what it means for anyone who planned around the old one. This is the credibility page. A tracker that has never recorded a change has never been tested.
 
-**5. A sitemap and per-page structured data**, so the regime pages are indexable and machine-readable.
+**5. A sitemap, per-page structured data, and an IndexNow key**, so the pages can actually be found. The deploy pings IndexNow automatically — it is the only search-submission route that needs no account and no verification beyond hosting a key file. Bing and Yandex use it. Google does not, and nothing here pretends otherwise.
 
 **6. A CLI**, below.
 
