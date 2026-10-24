@@ -504,7 +504,10 @@ def build(check_only: bool = False) -> int:
     (OUT / "changes.html").write_text(build_changes(changes, css), encoding="utf-8")
 
     feed = ics(rows)
-    (OUT / "deadlines.ics").write_text(feed, encoding="utf-8", newline="")
+    # newline="" is required: RFC 5545 wants CRLF and Path.write_text's
+    # newline argument only exists from Python 3.10, so open it directly.
+    with open(OUT / "deadlines.ics", "w", encoding="utf-8", newline="") as fh:
+        fh.write(feed)
 
     (OUT / "sitemap.xml").write_text(build_sitemap(rows, today), encoding="utf-8")
     (OUT / "robots.txt").write_text(
