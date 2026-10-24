@@ -24,16 +24,27 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Unit tests
         run: python -m unittest discover -s tests -t . -v
-      - name: Dataset validates and site builds
+      - name: Dataset validates and the site builds
         run: |
           python tools/build.py --check
           python tools/build.py
-      - name: Site is self-contained
+      - name: Every generated file is present
         run: |
-          if grep -q "<script src=" site/index.html; then
-            echo "external script found in site/index.html"; exit 1
-          fi
+          set -eu
           test -s site/index.html
+          test -s site/changes.html
+          test -s site/sitemap.xml
+          test -s site/robots.txt
+          test -s site/deadlines.ics
+          count=$(ls site/regime/*.html | wc -l)
+          test "$count" -eq 23 || { echo "expected 23 regime pages, found $count"; exit 1; }
+      - name: Nothing loads from the network
+        run: |
+          set -eu
+          for f in site/*.html site/regime/*.html; do
+            if grep -q '<script src=' "$f"; then echo "external script in $f"; exit 1; fi
+            if grep -q '@import' "$f"; then echo "css import in $f"; exit 1; fi
+          done
 
   render:
     runs-on: ubuntu-latest
@@ -45,8 +56,10 @@ jobs:
         with: { node-version: "20" }
       - run: python tools/build.py
       - run: npm install jsdom
-      - name: Drive the page in a real DOM
+      - name: Drive the tool in a real DOM
         run: node tools/render_test.js
+      - name: Pin the date that moved
+        run: node tools/check_regime.js
 
   data:
     runs-on: ubuntu-latest
@@ -56,16 +69,18 @@ jobs:
         with: { python-version: "3.13" }
       - name: Every deadline must still be verifiable
         run: python -m docket check
-      - name: A wrong date is the one failure this project cannot survive
+      - name: Warn when an entry has gone stale
         run: |
           python - <<'PY'
-          import json, sys
-          from datetime import date
+          import json
+          from datetime import date, datetime
+
           rows = json.load(open("docket/data/deadlines.json"))["deadlines"]
           today = date.today()
-          from datetime import datetime
-          stale = [r["id"] for r in rows
-                   if (today - datetime.strptime(r["verified"], "%Y-%m-%d").date()).days > 120]
+          stale = [
+              r["id"] for r in rows
+              if (today - datetime.strptime(r["verified"], "%Y-%m-%d").date()).days > 120
+          ]
           print(f"{len(rows)} entries, {len(stale)} stale")
           for s in stale:
               print(f"::warning::stale dataset entry: {s}")

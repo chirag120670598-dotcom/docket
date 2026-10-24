@@ -32,9 +32,11 @@ This is a scoping aid. It tells you what to read, by when, with what exposure. I
 
 ---
 
-## What the page does
+## What the site does
 
-Answer three questions — where you sell, what you put on the market, how many people work for you — and it returns the deadlines that bind that combination, sorted with the nearest first, each carrying:
+Six things, all generated from one dataset, all static, all free to host.
+
+**1. The tool.** Answer three questions — where you sell, what you put on the market, how many people work for you — and it returns the deadlines that bind that combination, sorted with the nearest first, each carrying:
 
 - the date, and how long is left
 - the statutory penalty tier
@@ -42,9 +44,19 @@ Answer three questions — where you sell, what you put on the market, how many 
 - whether the instrument was read (`primary`) or only reported (`reported`)
 - the date that entry was last checked
 
-Your answers go into the URL, so "here is what applies to *us*" is one copied link. There is an `.ics` export of whatever you are looking at, so the deadlines land in the calendar where deadlines actually get noticed.
+Your answers go into the URL, so "here is what applies to *us*" is one copied link.
 
-Nothing is transmitted. There is no backend, no analytics, no cookies, no font CDN, no login. The page is a single HTML file with the dataset inlined; it works from a USB stick.
+**2. One page per deadline.** 23 of them, at `/regime/<slug>.html`. Each carries the date as a large number, who it applies to, the penalty, three to four concrete things to do, the instrument, and links to the neighbouring deadlines in the same jurisdiction. These exist because people arrive from a search for one specific date, not from the front door.
+
+**3. A calendar you can subscribe to.** `/deadlines.ics`. Subscribe once in Google Calendar, Outlook or Apple Calendar and every deadline arrives with a **14-day-ahead reminder**, and it keeps working when this site is forgotten. This is the honest substitute for email alerts: no account, no server, no cost, and the reminder lives in the tool people already look at.
+
+**4. [What moved, and when](/changes.html).** Every date that changed after publication, with the instrument that changed it and what it means for anyone who planned around the old one. This is the credibility page. A tracker that has never recorded a change has never been tested.
+
+**5. A sitemap and per-page structured data**, so the regime pages are indexable and machine-readable.
+
+**6. A CLI**, below.
+
+Nothing is transmitted. There is no backend, no analytics, no cookies, no font CDN, no login, no email capture. Every page is self-contained HTML with the dataset inlined; they work from a USB stick.
 
 ---
 
@@ -144,8 +156,8 @@ git clone https://github.com/chirag120670598-dotcom/docket
 cd docket
 
 python3 -m docket deadlines --market EU --product software   # no install needed
-python3 tools/build.py && open site/index.html               # build the site
-python3 -m unittest discover -s tests -t .                   # 97 tests
+python3 tools/build.py && open site/index.html               # build the whole site
+python3 -m unittest discover -s tests -t .                   # 115 tests
 node tools/render_test.js                                    # 43 DOM checks
 ```
 
@@ -166,7 +178,7 @@ Python 3.9+. No dependencies at all — not for the CLI, not for the build, not 
 | `confidence` | `primary` — the instrument was read; `reported` — a secondary source was |
 | `verified` | the date it was last checked |
 
-The build refuses to run if an entry is missing a source, dates something in the future as verified, uses a vocabulary value the site does not understand, or duplicates an id. `docket check` adds a staleness test: anything unverified for over a year fails.
+The build refuses to run if an entry is missing a source, dates something in the future as verified, uses a vocabulary value the site does not understand, duplicates an id or a slug, or carries fewer than two concrete actions. `docket check` adds a staleness test: anything unverified for over a year fails.
 
 Currently covered:
 
@@ -189,6 +201,7 @@ These are specific. Read them before relying on anything here.
 - **The Article 14(7) router encodes the cascade, not your facts.** It will tell you which branch a given set of facts lands on; whether those facts are true — where decisions are really taken, who really has the most users — is your call.
 - **`docket dossier` checks content against the provision's field list. It does not judge adequacy.** A complete dossier can still be a bad filing.
 - **The site's "as of" date is the build date, not a guarantee of freshness.** Rebuild it, or watch the repo, if that matters.
+- **The calendar feed contains no update channel.** A subscribed calendar picks up the current file, but nothing tells you that a date moved. That is what `/changes.html` is for, and it is a page, not a notification.
 - **The staleness threshold is 120 days.** After that the build warns but still ships the entry. Hiding a stale deadline would help nobody; the warning is in the build output and the verification date is on every card.
 
 ---

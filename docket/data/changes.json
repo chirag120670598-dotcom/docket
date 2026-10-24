@@ -1,0 +1,70 @@
+{
+  "note": "Documented instances where a deadline moved or a regime changed after publication. This is not an automated diff of the dataset and does not claim to be a complete history: it lists the movements that were verified against a named instrument, because a moved date is the single most useful thing a deadline tracker can tell you. Absence of an entry here means no movement was recorded, not that no movement occurred.",
+  "changes": [
+    {
+      "date_noticed": "2026-07-24",
+      "regime": "AI Act",
+      "what": "High-risk obligations for Annex III standalone systems",
+      "moved_from": "2026-08-02",
+      "moved_to": "2027-12-02",
+      "why": "Regulation (EU) 2026/1744, the Digital Omnibus on AI, signed 8 July 2026, published in the Official Journal on 24 July 2026, in force 27 July 2026. Annex I product-embedded systems moved on the same instrument, from 2 August 2027 to 2 August 2028.",
+      "source": {
+        "label": "Regulation (EU) 2026/1744 amending Regulation (EU) 2024/1689",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744"
+      },
+      "consequence": "Anyone who built a 2026 remediation plan around the August 2026 date is now sixteen months early rather than late. Anyone who relied on a calendar published before 24 July 2026 is still being told the old date."
+    },
+    {
+      "date_noticed": "2026-09-17",
+      "regime": "Employees' Provident Fund",
+      "what": "Statutory wage ceiling for mandatory EPF coverage",
+      "moved_from": "15000 INR/month",
+      "moved_to": "25000 INR/month",
+      "why": "S.O. 5109(E) dated 17 September 2026, issued under s.2(89) of the Code on Social Security 2020, following the Cabinet decision of 16 September 2026. The first revision of the ceiling since September 2014.",
+      "source": {
+        "label": "S.O. 5109(E), 17 September 2026",
+        "url": "https://labour.gov.in/"
+      },
+      "consequence": "An employee on a 25,000 monthly basic moves from a 1,800 employee contribution to 3,000, and the employer's cost rises with it. Nobody who modelled their payroll before 17 September 2026 has this in their numbers."
+    },
+    {
+      "date_noticed": "2026-03-18",
+      "regime": "Corporate Sustainability Reporting",
+      "what": "Scope of mandatory CSRD reporting",
+      "moved_from": "roughly 50,000 in-scope companies",
+      "moved_to": "roughly 80% of those removed from scope; listed SMEs out entirely; CS3D phased rollout abolished",
+      "why": "Omnibus I entered into force on 18 March 2026, amending Directive (EU) 2022/2464 and the Corporate Sustainability Due Diligence Directive.",
+      "source": {
+        "label": "Omnibus I, in force 18 March 2026",
+        "url": "https://eur-lex.europa.eu/"
+      },
+      "consequence": "The movement is in the opposite direction to every other entry on this page: a regime contracted. Companies that had already budgeted a reporting programme should check whether they are still in scope before spending the next rupee on it."
+    },
+    {
+      "date_noticed": "2026-05-08",
+      "regime": "Labour Codes",
+      "what": "Central Rules that make the four Codes operable",
+      "moved_from": "Codes in force with no operative forms, registers or returns",
+      "moved_to": "G.S.R. 342(E) and 343(E) notified 8 May 2026",
+      "why": "The Codes came into force on 21 November 2025 but were not fully operable until the Central Rules supplied the forms and timelines. An earlier round of draft Central Rules was published on 30 December 2025.",
+      "source": {
+        "label": "Code on Wages (Central) Rules, 2026, G.S.R. 343(E)",
+        "url": "https://labour.gov.in/"
+      },
+      "consequence": "Between 21 November 2025 and 8 May 2026 there was a real window in which the obligation existed but the compliance form did not. Filings made in that window on old formats are worth re-checking."
+    },
+    {
+      "date_noticed": "2025-11-21",
+      "regime": "Labour Codes",
+      "what": "29 central labour statutes replaced by 4 Codes",
+      "moved_from": "29 Acts, 84 registers, 31 returns",
+      "moved_to": "4 Codes, 8 registers, 1 return",
+      "why": "The four labour codes were brought into force on 21 November 2025.",
+      "source": {
+        "label": "Ministry of Labour & Employment notification, 21 November 2025",
+        "url": "https://labour.gov.in/"
+      },
+      "consequence": "The reduction in paperwork is real, but it coincides with a widening of the wage definition that raises statutory cost. Fewer forms, higher contributions."
+    }
+  ]
+}

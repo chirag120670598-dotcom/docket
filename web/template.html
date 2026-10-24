@@ -10,153 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23151311'/><path d='M11 8h10M16 8v10M16 18l-4 7M16 18l4 7' stroke='%23f0a020' stroke-width='2.2' stroke-linecap='round' fill='none'/></svg>">
 <style>
-  :root {
-    --ink: #151311;
-    --ink-2: #4a443e;
-    --ink-3: #7d756c;
-    --line: #e2ddd6;
-    --paper: #fbf9f6;
-    --card: #ffffff;
-    --accent: #b45309;
-    --accent-soft: #fdf3e3;
-    --live: #0f766e;
-    --live-soft: #ecfdf5;
-    --soon: #b45309;
-    --far: #57534e;
-    --radius: 14px;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ink: #f5f2ee; --ink-2: #bdb6ad; --ink-3: #8a827a;
-      --line: #322d28; --paper: #12100e; --card: #1b1815;
-      --accent: #f0a020; --accent-soft: #2a2013;
-      --live: #34d399; --live-soft: #10231d;
-      --soon: #f0a020; --far: #a8a29e;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0; background: var(--paper); color: var(--ink);
-    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px 100px; }
-
-  header { padding: 56px 0 8px; }
-  .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  h1 { font-size: 30px; letter-spacing: -0.02em; margin: 0; font-weight: 700; }
-  .brand .mark { color: var(--accent); font-family: var(--mono); font-size: 22px; }
-  .stamp { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
-  .lede { font-size: 19px; line-height: 1.5; color: var(--ink-2); margin: 18px 0 0; max-width: 700px; }
-
-  .hook {
-    margin: 26px 0 0; padding: 16px 18px; border-left: 3px solid var(--accent);
-    background: var(--accent-soft); border-radius: 0 10px 10px 0; max-width: 760px;
-  }
-  .hook p { margin: 0 0 10px; font-size: 14.5px; color: var(--ink-2); }
-  .hook p:last-child { margin-bottom: 0; }
-  .hook strong { color: var(--ink); }
-
-  .panel {
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 22px 22px 6px; margin: 34px 0 0;
-  }
-  .q { margin: 0 0 20px; }
-  .q > label {
-    display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em;
-    text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px;
-  }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  button.chip {
-    font: inherit; font-size: 14.5px; cursor: pointer;
-    border: 1px solid var(--line); background: transparent; color: var(--ink-2);
-    padding: 8px 15px; border-radius: 999px; transition: all .13s ease;
-  }
-  button.chip:hover { border-color: var(--ink-3); color: var(--ink); }
-  button.chip[aria-pressed="true"] {
-    background: var(--ink); border-color: var(--ink); color: var(--paper); font-weight: 600;
-  }
-  .hint { font-size: 13px; color: var(--ink-3); margin: -4px 0 20px; }
-
-  .toolbar {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap; margin: 40px 0 14px;
-  }
-  .count { font-size: 15px; color: var(--ink-2); }
-  .count b { color: var(--ink); font-size: 19px; }
-  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-  button.ghost {
-    font: inherit; font-size: 13.5px; cursor: pointer; color: var(--ink-2);
-    background: transparent; border: 1px solid var(--line); border-radius: 8px;
-    padding: 7px 13px;
-  }
-  button.ghost:hover { border-color: var(--ink-3); color: var(--ink); }
-
-  .item {
-    background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--line);
-    border-radius: 10px; padding: 18px 20px; margin-bottom: 10px;
-  }
-  .item.upcoming { border-left-color: var(--accent); }
-  .item.live { border-left-color: var(--live); }
-  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .regime {
-    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.07em;
-    text-transform: uppercase; color: var(--ink-3);
-  }
-  .when { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; }
-  .when.upcoming { color: var(--accent); font-weight: 700; }
-  .when.live { color: var(--live); }
-  .title { font-size: 17px; font-weight: 650; margin: 5px 0 7px; letter-spacing: -0.01em; }
-  .summary { font-size: 14.5px; color: var(--ink-2); margin: 0 0 10px; }
-  .penalty {
-    font-size: 13.5px; color: var(--ink-2); background: var(--accent-soft);
-    border-radius: 7px; padding: 8px 12px; margin: 0 0 10px;
-  }
-  .penalty b { color: var(--ink); }
-  .foot { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 12.5px; }
-  .foot a { color: var(--ink-3); text-decoration: none; border-bottom: 1px dotted var(--ink-3); }
-  .foot a:hover { color: var(--accent); border-color: var(--accent); }
-  .conf { font-family: var(--mono); font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--line); color: var(--ink-3); }
-  .conf.primary { color: var(--live); border-color: color-mix(in srgb, var(--live) 40%, transparent); }
-  .empty { text-align: center; color: var(--ink-3); padding: 50px 20px; border: 1px dashed var(--line); border-radius: 10px; }
-
-  footer { margin-top: 60px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-3); }
-  footer h2 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
-  footer p { margin: 0 0 12px; max-width: 760px; }
-  footer code { font-family: var(--mono); font-size: 12.5px; background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
-
-  .support {
-    margin-top: 54px; padding: 24px 24px 20px; border: 1px solid var(--line);
-    border-radius: var(--radius); background: var(--card);
-  }
-  .support h2 {
-    font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--ink-3); margin: 0 0 12px; font-weight: 700;
-  }
-  .support p { margin: 0 0 12px; font-size: 14.5px; color: var(--ink-2); max-width: 760px; }
-  .pay {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    margin: 14px 0 16px; padding: 12px 14px; border-radius: 9px;
-    background: var(--accent-soft); border: 1px solid var(--line);
-  }
-  .paylabel {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.09em;
-    text-transform: uppercase; color: var(--ink-3);
-  }
-  .pay code {
-    font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--ink);
-    background: transparent; padding: 0; user-select: all;
-  }
-  .pay button { margin-left: auto; }
-  .fineprint { font-size: 13px; color: var(--ink-3); max-width: 760px; }
-
-  @media (max-width: 620px) {
-    header { padding-top: 36px; }
-    h1 { font-size: 25px; }
-    .lede { font-size: 16.5px; }
-  }
+{{CSS}}
 </style>
 </head>
 <body>
@@ -168,6 +22,11 @@
       <h1>Docket</h1>
       <span class="stamp" id="built"></span>
     </div>
+    <nav class="topnav">
+      <a href="changes.html">What moved</a>
+      <a href="deadlines.ics" download>Calendar feed</a>
+      <a href="https://github.com/chirag120670598-dotcom/docket">Source</a>
+    </nav>
     <p class="lede">
       Three questions. Then every compliance deadline that actually binds your
       company — with the date, the penalty, and a link to the instrument itself.
@@ -209,7 +68,8 @@
   <div class="toolbar">
     <div class="count" id="count"></div>
     <div class="actions">
-      <button class="ghost" id="ics">Download .ics</button>
+      <a class="ghost" id="icsall" href="deadlines.ics" download>All {{N}} as .ics</a>
+      <button class="ghost" id="ics">Only mine (.ics)</button>
       <button class="ghost" id="share">Copy link</button>
     </div>
   </div>

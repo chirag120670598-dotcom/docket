@@ -253,5 +253,162 @@ class TestBuild(unittest.TestCase):
             self.assertNotIn(needle, html)
 
 
+class TestGeneratedSite(unittest.TestCase):
+    """The site is now more than one file. Each artefact has one job and one
+    way to be wrong, so each gets checked."""
+
+    @classmethod
+    def setUpClass(cls):
+        builder.build()
+        cls.entries = load_entries()["deadlines"]
+        cls.site = ROOT / "site"
+
+    def test_index_exists(self):
+        self.assertTrue((self.site / "index.html").is_file())
+
+    def test_every_entry_gets_a_page(self):
+        for e in self.entries:
+            page = self.site / "regime" / f"{e['slug']}.html"
+            self.assertTrue(page.is_file(), e["slug"])
+
+    def test_no_unfilled_placeholders_anywhere(self):
+        for f in self.site.rglob("*.html"):
+            self.assertNotIn("{{", f.read_text(encoding="utf-8"), f.name)
+
+    def test_regime_page_carries_the_essentials(self):
+        for e in self.entries:
+            h = (self.site / "regime" / f"{e['slug']}.html").read_text(encoding="utf-8")
+            self.assertIn("<title>", h)
+            self.assertIn('name="description"', h)
+            self.assertIn('rel="canonical"', h)
+            self.assertIn("application/ld+json", h)
+            self.assertIn(e["source"]["url"], h, e["slug"])
+            self.assertIn("not legal advice", h.lower())
+
+    def test_every_title_carries_its_date(self):
+        """The date is what people search for. Truncation must never eat it."""
+        import re as _re
+        for e in self.entries:
+            h = (self.site / "regime" / f"{e['slug']}.html").read_text(encoding="utf-8")
+            import html as _html
+            title = _html.unescape(
+                _re.search(r"<title>(.*?)</title>", h, _re.S).group(1))
+            # Measure what a browser shows, not the entity-escaped source:
+            # an apostrophe becomes &#x27; and inflates the raw byte count.
+            self.assertLessEqual(len(title), 70, f"{e['slug']}: title too long ({title!r})")
+            d = datetime.strptime(e["date"], "%Y-%m-%d").date()
+            stamp = f"{d.day} {d.strftime('%B %Y')}"
+            self.assertIn(stamp, title, f"{e['slug']}: title lost its date ({title!r})")
+            self.assertTrue(title.endswith("| Docket") or len(title) <= 70, e["slug"])
+
+    def test_regime_page_states_the_date(self):
+        h = (self.site / "regime" / "eu-ai-act-high-risk-annex-iii-2027.html").read_text()
+        self.assertIn("2 December 2027", h)
+
+    def test_regime_pages_link_into_the_tool_with_an_answer(self):
+        h = (self.site / "regime" / "eu-cyber-resilience-act-article-14-reporting.html").read_text()
+        # The ampersand is escaped because this is an HTML attribute, which is
+        # the correct serialisation. Check what a browser will resolve to.
+        self.assertIn('href="../#m=EU&amp;p=connected_device"', h)
+
+    def test_regime_page_keeps_the_honest_badge(self):
+        h = (self.site / "regime" / "eu-ai-act-high-risk-annex-iii-2027.html").read_text()
+        self.assertIn("secondary source", h)
+
+    def test_pages_share_one_stylesheet(self):
+        """Inlined, not linked — the preview iframe has no network."""
+        for f in self.site.rglob("*.html"):
+            self.assertNotIn('<link rel="stylesheet"', f.read_text(encoding="utf-8"))
+            self.assertNotIn("@import", f.read_text(encoding="utf-8"))
+
+    def read_ics(self):
+        # newline="" preserves the CRLF that RFC 5545 requires; read_text()
+        # would translate them away and hide a broken calendar.
+        with open(self.site / "deadlines.ics", encoding="utf-8", newline="") as f:
+            return f.read()
+
+    def test_calendar_feed_is_wellformed(self):
+        feed = self.read_ics()
+        self.assertTrue(feed.startswith("BEGIN:VCALENDAR"))
+        self.assertTrue(feed.rstrip().endswith("END:VCALENDAR"))
+        self.assertEqual(feed.count("BEGIN:VEVENT"), len(self.entries))
+        self.assertEqual(feed.count("END:VEVENT"), len(self.entries))
+        self.assertEqual(feed.count("BEGIN:VALARM"), len(self.entries))
+        for line in feed.split("\r\n"):
+            self.assertNotIn("\n", line, "raw newline inside a calendar line")
+
+    def test_calendar_feed_has_one_uid_per_entry(self):
+        feed = self.read_ics()
+        for e in self.entries:
+            self.assertIn(f"UID:{e['id']}@docket", feed)
+
+    def test_calendar_reminder_comes_before_the_date(self):
+        feed = self.read_ics()
+        self.assertIn("TRIGGER:-P14D", feed)
+
+    def test_sitemap_lists_every_page(self):
+        import xml.etree.ElementTree as ET
+        tree = ET.parse(self.site / "sitemap.xml")
+        ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        locs = [u.find("s:loc", ns).text for u in tree.getroot().findall("s:url", ns)]
+        self.assertEqual(len(locs), len(self.entries) + 2)
+        for e in self.entries:
+            self.assertIn(f"/regime/{e['slug']}.html", " ".join(locs))
+        self.assertTrue(all(l.startswith("http") for l in locs))
+
+    def test_robots_points_at_the_sitemap(self):
+        r = (self.site / "robots.txt").read_text(encoding="utf-8")
+        self.assertIn("Sitemap:", r)
+        self.assertIn("sitemap.xml", r)
+        self.assertNotIn("Disallow: /", r)
+
+    def test_changes_page_exists_and_names_the_ai_act_move(self):
+        h = (self.site / "changes.html").read_text(encoding="utf-8")
+        self.assertIn("2 December 2027", h)
+        self.assertIn("2026/1744", h)
+        self.assertIn("not an automated diff", h)
+
+    def test_every_internal_link_resolves(self):
+        """A static site has no 404 handler to catch a typo, so the build has to."""
+        import re as _re
+        from urllib.parse import urlparse, unquote
+        broken = []
+        for f in self.site.rglob("*.html"):
+            rel_dir = f.parent.relative_to(self.site)
+            text = f.read_text(encoding="utf-8")
+            for href in _re.findall(r'href="([^"]+)"', text):
+                if href.startswith(("http://", "https://", "mailto:", "data:", "#")):
+                    continue
+                target = urlparse(href)
+                path = unquote(target.path)
+                if not path:
+                    continue
+                dest = (self.site / rel_dir / path) if not path.startswith("/") \
+                    else (self.site / path.lstrip("/"))
+                if path.endswith("/"):
+                    dest = dest / "index.html"
+                dest = Path(str(dest).replace("\\", "/"))
+                try:
+                    dest = dest.resolve()
+                except OSError:
+                    pass
+                if not dest.exists():
+                    broken.append(f"{f.name} -> {href}")
+        self.assertEqual(broken, [], "broken internal links: " + ", ".join(broken))
+
+    def test_no_absolute_localhost_links(self):
+        for f in self.site.rglob("*.html"):
+            low = f.read_text(encoding="utf-8").lower()
+            self.assertNotIn("localhost", low, f.name)
+            self.assertNotIn("127.0.0.1", low, f.name)
+
+    def test_no_page_ships_coercion_copy(self):
+        for f in self.site.rglob("*.html"):
+            low = f.read_text(encoding="utf-8").lower()
+            for needle in ("only today", "others have donated", "act now",
+                           "limited time", "last chance", "hurry"):
+                self.assertNotIn(needle, low, f.name)
+
+
 if __name__ == "__main__":
     unittest.main()

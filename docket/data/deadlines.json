@@ -1,7 +1,7 @@
 {
   "schema": "docket/deadlines/1",
   "updated": "2026-10-24",
-  "note": "Every entry carries the instrument it comes from and the date it was last checked. 'confidence: primary' means the instrument itself was read. 'confidence: reported' means a secondary source was read and the instrument was not. Nothing is listed without a source.",
+  "note": "Every entry carries the instrument it comes from and the date it was last checked. 'confidence: primary' means the instrument itself was read. 'confidence: reported' means a secondary source was read and the instrument was not. Nothing is listed without a source. Slugs are stable and are what the public per-regime URLs use; do not change one without a redirect.",
   "deadlines": [
     {
       "id": "eu-cra-art14",
@@ -10,12 +10,39 @@
       "title": "Article 14 reporting duty goes live",
       "date": "2026-09-11",
       "kind": "obligation",
-      "summary": "Manufacturers must report actively exploited vulnerabilities within 24 hours and severe incidents within 24 hours, through the ENISA single reporting platform.",
+      "summary": "Manufacturers must report an actively exploited vulnerability within 24 hours of becoming aware, and file a fuller notification within 72 hours, through the ENISA single reporting platform. Severe incidents follow a parallel set of clocks.",
       "penalty": "Article 64 fine tier applies from 11 December 2027: up to €15m or 2.5% of worldwide turnover. Until then the exposure is market surveillance action under Articles 54 and 58.",
-      "applies_if": { "markets": ["EU"], "products": ["connected_device", "software"], "sizes": ["micro", "small", "medium", "large"], "roles": ["manufacturer"] },
-      "source": { "label": "Regulation (EU) 2024/2847, Article 14 and Article 71(2)", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R2847" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "connected_device",
+          "software"
+        ],
+        "sizes": [
+          "micro",
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2024/2847, Article 14 and Article 71(2)",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R2847"
+      },
       "confidence": "primary",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-cyber-resilience-act-article-14-reporting",
+      "actions": [
+        "Confirm whether you are the manufacturer of a product with digital elements placed on the EU market. For software, that includes anything you distribute commercially.",
+        "Decide, in writing and before an incident, which CSIRT you will file with under Article 14(7). Deciding it at hour 23 is how a deadline is missed.",
+        "Pre-draft the early warning. The Regulation gives you 24 hours, not 24 hours in which to also compose the first draft.",
+        "Record the exact moment you became aware of the exploited vulnerability. Every one of the three clocks runs from that moment, not from when you started investigating."
+      ]
     },
     {
       "id": "eu-cra-fines",
@@ -26,10 +53,38 @@
       "kind": "deadline",
       "summary": "The full Regulation applies from this date. Article 64 fines attach to non-compliance with Article 14, up to €15m or 2.5% of worldwide annual turnover, whichever is higher.",
       "penalty": "€15m or 2.5% (Annex I, Articles 13 and 14); €10m or 2%; €5m or 1%.",
-      "applies_if": { "markets": ["EU"], "products": ["connected_device", "software"], "sizes": ["micro", "small", "medium", "large"], "roles": ["manufacturer", "importer", "distributor"] },
-      "source": { "label": "Regulation (EU) 2024/2847, Articles 64 and 71(2)", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R2847" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "connected_device",
+          "software"
+        ],
+        "sizes": [
+          "micro",
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "importer",
+          "distributor"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2024/2847, Articles 64 and 71(2)",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R2847"
+      },
       "confidence": "primary",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-cyber-resilience-act-fines-2027",
+      "actions": [
+        "Article 64(10) provides exemptions for microenterprises and small enterprises in relation to the Article 14 deadlines. Read the exact scope before relying on it.",
+        "The 2.5% tier attaches to Articles 13 and 14. The wider obligations are 1% and below.",
+        "Fines are set by market surveillance authorities, so enforcement practice will vary by Member State before it converges."
+      ]
     },
     {
       "id": "eu-ai-act-annex3",
@@ -40,10 +95,36 @@
       "kind": "deadline",
       "summary": "Conformity assessment, technical documentation and EU database registration for standalone high-risk systems: hiring, credit scoring, education, essential services, biometrics, law enforcement. Deferred from 2 August 2026 by the Digital Omnibus on AI.",
       "penalty": "Up to €15m or 3% of worldwide turnover for prohibited practices; €35m or 7% for the prohibitions in Article 5. High-risk breaches sit at €15m or 3%.",
-      "applies_if": { "markets": ["EU"], "products": ["ai_system"], "sizes": ["small", "medium", "large"], "roles": ["provider", "deployer"] },
-      "source": { "label": "Regulation (EU) 2026/1744 amending Regulation (EU) 2024/1689; in force 27 July 2026", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "ai_system"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "provider",
+          "deployer"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2026/1744 amending Regulation (EU) 2024/1689; in force 27 July 2026",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-ai-act-high-risk-annex-iii-2027",
+      "actions": [
+        "Classify each AI feature you ship against Annex III: hiring and worker management, creditworthiness, education, essential public services, biometrics, law enforcement, migration, justice.",
+        "If you are in scope, the obligations are the full Chapter III set — risk management, data governance, technical documentation, logging, human oversight, accuracy and robustness.",
+        "Register the system in the EU database. This is a separate step from the conformity assessment and is routinely forgotten.",
+        "Do not build a 2026 plan. Regulation (EU) 2026/1744 moved this date to 2 December 2027 while every older calendar still says August 2026."
+      ]
     },
     {
       "id": "eu-ai-act-annex1",
@@ -54,10 +135,36 @@
       "kind": "deadline",
       "summary": "High-risk obligations for AI embedded in products already covered by EU product-safety law: medical devices, machinery, toys, lifts. Deferred from 2 August 2027.",
       "penalty": "€15m or 3% of worldwide turnover.",
-      "applies_if": { "markets": ["EU"], "products": ["ai_system", "connected_device"], "sizes": ["small", "medium", "large"], "roles": ["manufacturer", "provider"] },
-      "source": { "label": "Regulation (EU) 2026/1744 amending Regulation (EU) 2024/1689", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "ai_system",
+          "connected_device"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "provider"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2026/1744 amending Regulation (EU) 2024/1689",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202601744"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-ai-act-high-risk-annex-i-2028",
+      "actions": [
+        "Applies to AI that is a safety component of a product already covered by EU product-safety law: medical devices, machinery, toys, lifts, radio equipment.",
+        "Conformity assessment runs through the existing product regime, not a separate AI route.",
+        "Decide now whether your AI is a safety component or an ancillary feature. The answer decides which law applies and it is not always obvious."
+      ]
     },
     {
       "id": "eu-ai-act-art50-transition",
@@ -68,10 +175,35 @@
       "kind": "deadline",
       "summary": "Systems placed on the market before 2 August 2026 must comply with the Article 50(2) obligation to mark synthetic audio, image, video and text in a machine-readable format.",
       "penalty": "€15m or 3% of worldwide turnover.",
-      "applies_if": { "markets": ["EU"], "products": ["ai_system", "software"], "sizes": ["small", "medium", "large"], "roles": ["provider"] },
-      "source": { "label": "Regulation (EU) 2024/1689, Article 50(2) and Article 113", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "ai_system",
+          "software"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "provider"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2024/1689, Article 50(2) and Article 113",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-ai-act-article-50-content-marking",
+      "actions": [
+        "Mark synthetic audio, image, video and text in a machine-readable format. This is the watermarking duty and it has a date.",
+        "The transition covers systems placed on the market before 2 August 2026, so legacy models are caught by it.",
+        "Chatbots and emotion-recognition systems carry disclosure duties to the user under the same Article."
+      ]
     },
     {
       "id": "eu-pld",
@@ -82,10 +214,39 @@
       "kind": "obligation",
       "summary": "Directive (EU) 2024/2853 applies. Software, including AI systems, is a product for strict liability purposes. Liability without fault, a 25-year long-stop, and disclosure duties that can reverse the burden of proof.",
       "penalty": "Civil liability, not administrative fines — but the disclosure duties and the presumption of defectiveness are the expensive part.",
-      "applies_if": { "markets": ["EU"], "products": ["software", "connected_device", "ai_system", "physical_goods"], "sizes": ["small", "medium", "large"], "roles": ["manufacturer", "provider", "importer"] },
-      "source": { "label": "Directive (EU) 2024/2853, Article 31 (transposition)", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024L2853" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "software",
+          "connected_device",
+          "ai_system",
+          "physical_goods"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "provider",
+          "importer"
+        ]
+      },
+      "source": {
+        "label": "Directive (EU) 2024/2853, Article 31 (transposition)",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024L2853"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-product-liability-directive-software-2026",
+      "actions": [
+        "Software is a product under strict liability from 9 December 2026. Prepare to produce technical documentation on request.",
+        "The disclosure duties can reverse the burden of proof: an undisclosed defect is presumed to exist.",
+        "The long-stop is 25 years. Archive design, testing and release records accordingly — most teams keep 12 months."
+      ]
     },
     {
       "id": "eu-machinery",
@@ -96,10 +257,39 @@
       "kind": "obligation",
       "summary": "No grace period and no transition. Machinery must be protected against corruption of the software and control systems that affect safety. Digital instructions permitted. Machines lawfully placed on the market before this date stay under the Directive permanently.",
       "penalty": "Member State penalties; the practical cost is a blocked CE marking.",
-      "applies_if": { "markets": ["EU"], "products": ["connected_device", "physical_goods"], "sizes": ["micro", "small", "medium", "large"], "roles": ["manufacturer", "importer", "distributor"] },
-      "source": { "label": "Regulation (EU) 2023/1230, Article 54", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1230" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "connected_device",
+          "physical_goods"
+        ],
+        "sizes": [
+          "micro",
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "importer",
+          "distributor"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2023/1230, Article 54",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1230"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-machinery-regulation-2027",
+      "actions": [
+        "No grace period and no transition. Machinery placed on the market from 20 January 2027 must comply with Regulation (EU) 2023/1230.",
+        "Safety functions must be protected against corruption of the software and control systems around them.",
+        "Digital instructions are permitted. That is a real cost saving, but the content requirements are not reduced.",
+        "Machines lawfully placed on the market before the date stay under Directive 2006/42/EC permanently. The cut-off attaches to the individual machine."
+      ]
     },
     {
       "id": "eu-data-act-switching",
@@ -110,10 +300,35 @@
       "kind": "deadline",
       "summary": "Providers may no longer charge for switching between cloud providers or for exporting data. Switching charges must be phased down before this date.",
       "penalty": "Member State penalties.",
-      "applies_if": { "markets": ["EU"], "products": ["software", "services"], "sizes": ["small", "medium", "large"], "roles": ["provider"] },
-      "source": { "label": "Regulation (EU) 2023/2854, Article 29 (through Article 50)", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R2854" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "software",
+          "services"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "provider"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2023/2854, Article 29 (through Article 50)",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R2854"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-data-act-cloud-switching-2027",
+      "actions": [
+        "Switching charges must be phased down before 12 January 2027 and abolished from that date.",
+        "Publish a switching plan and the contractual terms a customer needs in order to move.",
+        "Check exit and egress fees in your contracts now. An unamended contract becomes non-compliant on the day."
+      ]
     },
     {
       "id": "eu-construction",
@@ -124,10 +339,35 @@
       "kind": "obligation",
       "summary": "The revised CPR replaces the 2011 Regulation, with digital product information and new obligations on manufacturers and importers of construction products.",
       "penalty": "Member State penalties; withdrawal from the market.",
-      "applies_if": { "markets": ["EU"], "products": ["physical_goods"], "sizes": ["small", "medium", "large"], "roles": ["manufacturer", "importer"] },
-      "source": { "label": "Regulation (EU) 2024/3110", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202403110" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "physical_goods"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "importer"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2024/3110",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202403110"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-construction-products-regulation-2027",
+      "actions": [
+        "The revised Construction Products Regulation replaces the 2011 Regulation and brings digital product information.",
+        "Importers take on new obligations. Check which role you are actually in before assuming the manufacturer's duties are yours.",
+        "Update declarations of performance to the new template."
+      ]
     },
     {
       "id": "eu-ppwr",
@@ -138,10 +378,36 @@
       "kind": "obligation",
       "summary": "Applies across all 27 Member States with a single rulebook: recyclability requirements, minimum recycled content, and restrictions on single-use packaging. Replaces the Directive.",
       "penalty": "Member State penalties; extended producer responsibility costs.",
-      "applies_if": { "markets": ["EU"], "products": ["physical_goods"], "sizes": ["small", "medium", "large"], "roles": ["manufacturer", "importer", "distributor"] },
-      "source": { "label": "Regulation (EU) 2025/40, Article 79", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "physical_goods"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "importer",
+          "distributor"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2025/40, Article 79",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500040"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-packaging-regulation-ppwr-2026",
+      "actions": [
+        "One rulebook across all 27 Member States: recyclability, minimum recycled content, restrictions on single-use packaging.",
+        "Work out which packaging you place on the market and under which grade it scores.",
+        "Extended producer responsibility fees change. Reprice packaging rather than absorbing the difference quietly."
+      ]
     },
     {
       "id": "eu-batteries-passport",
@@ -152,10 +418,36 @@
       "kind": "deadline",
       "summary": "Digital battery passport for industrial batteries above 2 kWh, LMT batteries and EV batteries, plus supply chain due diligence obligations.",
       "penalty": "Member State penalties; market withdrawal.",
-      "applies_if": { "markets": ["EU"], "products": ["connected_device", "physical_goods"], "sizes": ["small", "medium", "large"], "roles": ["manufacturer", "importer"] },
-      "source": { "label": "Regulation (EU) 2023/1542, Articles 13 and 48", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1542" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "connected_device",
+          "physical_goods"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "importer"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2023/1542, Articles 13 and 48",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1542"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-batteries-regulation-passport-2027",
+      "actions": [
+        "Digital battery passport required for industrial batteries above 2 kWh, LMT batteries and EV batteries.",
+        "Supply chain due diligence obligations attach to raw material sourcing, not just to the finished cell.",
+        "The passport is machine-readable and reached by QR code. Budget for a data source behind it, not just a link."
+      ]
     },
     {
       "id": "eu-eudr",
@@ -166,10 +458,36 @@
       "kind": "obligation",
       "summary": "Due diligence statements required for cattle, cocoa, coffee, oil palm, rubber, soya and wood placed on or exported from the EU market, with geolocation of plots. Small and micro operators have a longer runway.",
       "penalty": "Up to 4% of EU turnover, plus exclusion from public procurement.",
-      "applies_if": { "markets": ["EU"], "products": ["physical_goods"], "sizes": ["small", "medium", "large"], "roles": ["manufacturer", "importer", "distributor"] },
-      "source": { "label": "Regulation (EU) 2023/1115, Article 38 (as amended)", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1115" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "physical_goods"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "importer",
+          "distributor"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2023/1115, Article 38 (as amended)",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023R1115"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-deforestation-regulation-eudr",
+      "actions": [
+        "A due diligence statement is needed per consignment for cattle, cocoa, coffee, oil palm, rubber, soya and wood.",
+        "You need the geolocation of the plot the commodity came from, not just the country of origin.",
+        "Small and micro operators have a longer runway. That is a delay in the date, not an exemption."
+      ]
     },
     {
       "id": "eu-pay-transparency-transpose",
@@ -180,10 +498,38 @@
       "kind": "deadline",
       "summary": "Transposition deadline for Directive (EU) 2023/970. Pay transparency in recruitment, a right to information on pay levels, and gender pay gap reporting.",
       "penalty": "Member State penalties, including fines and orders to remedy.",
-      "applies_if": { "markets": ["EU"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["small", "medium", "large"], "roles": ["employer"] },
-      "source": { "label": "Directive (EU) 2023/970, Article 30", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023L0970" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "employer"
+        ]
+      },
+      "source": {
+        "label": "Directive (EU) 2023/970, Article 30",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023L0970"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-pay-transparency-transposition-2026",
+      "actions": [
+        "Pay transparency in recruitment: candidates must be told the pay range before interview.",
+        "Employees have a right to request information about their own pay level and the criteria used.",
+        "Check your Member State's transposition status. The deadline has passed and implementation varies by country."
+      ]
     },
     {
       "id": "eu-pay-transparency-report",
@@ -194,10 +540,36 @@
       "kind": "deadline",
       "summary": "Employers with 250 or more employees report using 2026 pay data. Employers with 150 to 249 employees report on the same date, then every three years.",
       "penalty": "Member State penalties.",
-      "applies_if": { "markets": ["EU"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["large"], "roles": ["employer"] },
-      "source": { "label": "Directive (EU) 2023/970, Articles 9 and 10", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023L0970" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "large"
+        ],
+        "roles": [
+          "employer"
+        ]
+      },
+      "source": {
+        "label": "Directive (EU) 2023/970, Articles 9 and 10",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023L0970"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-pay-transparency-first-report-2027",
+      "actions": [
+        "Employers with 250 or more staff report on 2026 pay data. Employers with 150 to 249 report on the same date, then every three years.",
+        "The report compares pay by job category and by each component of pay, not just base salary.",
+        "Where a difference of 5% or more is not justified by objective criteria, a joint pay assessment is required."
+      ]
     },
     {
       "id": "eu-gdpr",
@@ -208,10 +580,42 @@
       "kind": "obligation",
       "summary": "Personal data breach notification to the supervisory authority within 72 hours of becoming aware, unless unlikely to result in a risk to rights and freedoms. Notify affected data subjects without undue delay where the risk is high.",
       "penalty": "Up to €20m or 4% of worldwide annual turnover.",
-      "applies_if": { "markets": ["EU"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["micro", "small", "medium", "large"], "roles": ["employer", "provider", "manufacturer", "deployer"] },
-      "source": { "label": "Regulation (EU) 2016/679, Articles 33 and 34", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "micro",
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "employer",
+          "provider",
+          "manufacturer",
+          "deployer"
+        ]
+      },
+      "source": {
+        "label": "Regulation (EU) 2016/679, Articles 33 and 34",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+      },
       "confidence": "primary",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-gdpr-breach-notification-72-hours",
+      "actions": [
+        "Seventy-two hours from awareness to notify the supervisory authority, unless the breach is unlikely to result in a risk.",
+        "Record every breach internally even where you do not notify. The record is the defence.",
+        "High risk to individuals carries a separate duty to notify them without undue delay."
+      ]
     },
     {
       "id": "eu-nis2",
@@ -222,10 +626,37 @@
       "kind": "obligation",
       "summary": "Essential and important entities must report significant incidents: early warning within 24 hours, incident notification within 72 hours, final report within one month.",
       "penalty": "Up to €10m or 2% of worldwide turnover for essential entities; €7m or 1.4% for important entities.",
-      "applies_if": { "markets": ["EU"], "products": ["software", "services", "connected_device"], "sizes": ["medium", "large"], "roles": ["provider", "manufacturer", "employer"] },
-      "source": { "label": "Directive (EU) 2022/2555, Articles 23 and 41", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "software",
+          "services",
+          "connected_device"
+        ],
+        "sizes": [
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "provider",
+          "manufacturer",
+          "employer"
+        ]
+      },
+      "source": {
+        "label": "Directive (EU) 2022/2555, Articles 23 and 41",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022L2555"
+      },
       "confidence": "primary",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-nis2-incident-reporting",
+      "actions": [
+        "Early warning within 24 hours, incident notification within 72 hours, final report within one month.",
+        "Check whether you are an essential or important entity — the sector and size thresholds decide it, not your own view of your importance.",
+        "Management bodies can be held personally liable for non-compliance, which changes who in the company needs to know."
+      ]
     },
     {
       "id": "in-labour-codes",
@@ -236,10 +667,39 @@
       "kind": "obligation",
       "summary": "Code on Wages, Industrial Relations Code, Code on Social Security and OSH Code replace 29 central labour laws. Section 2(y) of the Code on Wages redefines wages, with a 50% floor on basic plus DA relative to the remuneration base.",
       "penalty": "Penalties under each Code, plus interest on delayed PF and gratuity.",
-      "applies_if": { "markets": ["IN"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["micro", "small", "medium", "large"], "roles": ["employer"] },
-      "source": { "label": "Code on Wages 2019, s.2(y); Gazette notification 21 November 2025", "url": "https://labour.gov.in/" },
+      "applies_if": {
+        "markets": [
+          "IN"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "micro",
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "employer"
+        ]
+      },
+      "source": {
+        "label": "Code on Wages 2019, s.2(y); Gazette notification 21 November 2025",
+        "url": "https://labour.gov.in/"
+      },
       "confidence": "primary",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "india-four-labour-codes-2025",
+      "actions": [
+        "Map which of the 29 repealed statutes applied to you, and confirm the equivalent obligation now sits in one of the four Codes.",
+        "Recompute 'wages' for every employee against s.2(y), including the 50% floor. This is the step that changes payroll cost, not the paperwork.",
+        "Reduce 84 registers to the 8 that survive, and formally retire the rest so nobody keeps filling them in."
+      ]
     },
     {
       "id": "in-labour-rules",
@@ -250,10 +710,39 @@
       "kind": "obligation",
       "summary": "G.S.R. 342(E) and 343(E) and the OSH and Social Security rules supply the forms, registers, returns and timelines that make the Codes operable. Three registers: Form I employee register, Form IV wage register, Form IX attendance register.",
       "penalty": "Penalties under the Codes for failure to maintain registers.",
-      "applies_if": { "markets": ["IN"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["micro", "small", "medium", "large"], "roles": ["employer"] },
-      "source": { "label": "Code on Wages (Central) Rules, 2026, G.S.R. 343(E), 8 May 2026", "url": "https://labour.gov.in/" },
+      "applies_if": {
+        "markets": [
+          "IN"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "micro",
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "employer"
+        ]
+      },
+      "source": {
+        "label": "Code on Wages (Central) Rules, 2026, G.S.R. 343(E), 8 May 2026",
+        "url": "https://labour.gov.in/"
+      },
       "confidence": "primary",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "india-labour-codes-central-rules-2026",
+      "actions": [
+        "Three registers carry most of the weight: Form I employee register, Form IV wage register, Form IX attendance register.",
+        "Confirm the central forms match your state's notified rules. Where both exist, the state rule governs on the same subject.",
+        "The 31 separate returns collapse into a single consolidated return."
+      ]
     },
     {
       "id": "in-epf-ceiling",
@@ -264,10 +753,39 @@
       "kind": "obligation",
       "summary": "Statutory wage ceiling for mandatory EPF coverage raised from ₹15,000 to ₹25,000 per month, the first change since September 2014. Maximum employee contribution at the ceiling becomes ₹3,000; EPS share ₹2,082.50.",
       "penalty": "Damages and interest under section 14B of the EPF Act for short contribution.",
-      "applies_if": { "markets": ["IN"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["small", "medium", "large"], "roles": ["employer"] },
-      "source": { "label": "S.O. 5109(E) dated 17 September 2026, under s.2(89) Code on Social Security 2020", "url": "https://labour.gov.in/" },
+      "applies_if": {
+        "markets": [
+          "IN"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "employer"
+        ]
+      },
+      "source": {
+        "label": "S.O. 5109(E) dated 17 September 2026, under s.2(89) Code on Social Security 2020",
+        "url": "https://labour.gov.in/"
+      },
       "confidence": "primary",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "india-epf-wage-ceiling-25000",
+      "actions": [
+        "Ceiling raised from 15,000 to 25,000 monthly — the first revision since September 2014.",
+        "At the ceiling: employee contribution 3,000, EPS 2,082.50, employer EPF 917.50, EDLI 125, administration 125.",
+        "Recompute cost for everyone whose basic falls between 15,000 and 25,000. That is the whole affected population and it is easy to undercount.",
+        "Employees previously excluded by the old ceiling come into membership unless another exemption applies."
+      ]
     },
     {
       "id": "in-state-rules",
@@ -278,10 +796,39 @@
       "kind": "deadline",
       "summary": "The Labour Secretary stated the Centre was targeting full state-wise coverage by this date. A stated target, not a legal deadline — roughly ten states had notified final rules by late September 2026 and the rest were at draft stage.",
       "penalty": "None directly; the risk is operating on central rules where the state has notified a different, more employee-favourable rule.",
-      "applies_if": { "markets": ["IN"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["micro", "small", "medium", "large"], "roles": ["employer"] },
-      "source": { "label": "Ministry of Labour & Employment statement, reported late September 2026", "url": "https://labour.gov.in/" },
+      "applies_if": {
+        "markets": [
+          "IN"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "micro",
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "employer"
+        ]
+      },
+      "source": {
+        "label": "Ministry of Labour & Employment statement, reported late September 2026",
+        "url": "https://labour.gov.in/"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "india-state-labour-rules-deadline",
+      "actions": [
+        "This is the Centre's stated target, not a legal deadline. Verify the position for each state you employ people in.",
+        "Where a state has notified final rules, those override the central rules on the same subject.",
+        "Roughly ten states had final rules by late September 2026 and the rest were at draft stage, so the target looked optimistic."
+      ]
     },
     {
       "id": "in-dpdp",
@@ -292,10 +839,40 @@
       "kind": "obligation",
       "summary": "Breach notification to the Data Protection Board and to affected data principals, without delay. Timelines and the 18-month implementation runway are set by the DPDP Rules rather than the Act itself.",
       "penalty": "Up to ₹250 crore for failure to take reasonable security safeguards; up to ₹200 crore for breach notification failures.",
-      "applies_if": { "markets": ["IN"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["small", "medium", "large"], "roles": ["employer", "provider", "manufacturer"] },
-      "source": { "label": "Digital Personal Data Protection Act 2023, s.8(6) and s.33; DPDP Rules", "url": "https://www.meity.gov.in/" },
+      "applies_if": {
+        "markets": [
+          "IN"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "employer",
+          "provider",
+          "manufacturer"
+        ]
+      },
+      "source": {
+        "label": "Digital Personal Data Protection Act 2023, s.8(6) and s.33; DPDP Rules",
+        "url": "https://www.meity.gov.in/"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "india-dpdp-breach-notification",
+      "actions": [
+        "Breach notification to the Data Protection Board and to affected data principals, without delay.",
+        "Penalties run to 250 crore for failing to take reasonable security safeguards and 200 crore for notification failures.",
+        "The DPDP Rules set the format and the implementation timeline. Read them rather than the Act alone."
+      ]
     },
     {
       "id": "us-ca-sb54",
@@ -306,24 +883,78 @@
       "kind": "deadline",
       "summary": "Producers of single-use packaging and plastic food service ware sold in California must join a producer responsibility organisation and pay fees toward recycling targets.",
       "penalty": "Civil penalties per day for non-participation.",
-      "applies_if": { "markets": ["US-CA"], "products": ["physical_goods"], "sizes": ["small", "medium", "large"], "roles": ["manufacturer", "importer", "distributor"] },
-      "source": { "label": "California SB 54 (2022), Plastic Pollution Prevention and Packaging Producer Responsibility Act", "url": "https://calrecycle.ca.gov/packaging/packaging-epr/" },
+      "applies_if": {
+        "markets": [
+          "US-CA"
+        ],
+        "products": [
+          "physical_goods"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large"
+        ],
+        "roles": [
+          "manufacturer",
+          "importer",
+          "distributor"
+        ]
+      },
+      "source": {
+        "label": "California SB 54 (2022), Plastic Pollution Prevention and Packaging Producer Responsibility Act",
+        "url": "https://calrecycle.ca.gov/packaging/packaging-epr/"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "california-sb-54-producer-responsibility-2027",
+      "actions": [
+        "Producers of single-use packaging and plastic food service ware sold in California must join a producer responsibility organisation.",
+        "Fees scale with material and recyclability, which turns packaging design into a visible cost line.",
+        "Non-participation carries civil penalties assessed per day."
+      ]
     },
     {
       "id": "eu-csrd",
       "jurisdiction": "EU",
       "regime": "Corporate Sustainability Reporting",
-      "title": "CSRD as amended by the 2026 Omnibus — phase-in",
-      "date": "2027-03-19",
-      "kind": "deadline",
+      "title": "CSRD scope cut by roughly 80% — Omnibus I enters into force",
+      "date": "2026-03-18",
+      "kind": "obligation",
       "summary": "Omnibus I entered into force on 18 March 2026 and removed roughly 80% of companies from mandatory CSRD scope. Listed SMEs are out entirely and the CS3D phased rollout was abolished. Verify whether you are still in scope before building a reporting programme.",
       "penalty": "Member State penalties for in-scope entities that fail to report.",
-      "applies_if": { "markets": ["EU"], "products": ["software", "services", "physical_goods", "connected_device", "ai_system"], "sizes": ["large"], "roles": ["employer", "provider", "manufacturer"] },
-      "source": { "label": "Omnibus I (in force 18 March 2026) amending Directive (EU) 2022/2464", "url": "https://eur-lex.europa.eu/" },
+      "applies_if": {
+        "markets": [
+          "EU"
+        ],
+        "products": [
+          "software",
+          "services",
+          "physical_goods",
+          "connected_device",
+          "ai_system"
+        ],
+        "sizes": [
+          "large"
+        ],
+        "roles": [
+          "employer",
+          "provider",
+          "manufacturer"
+        ]
+      },
+      "source": {
+        "label": "Omnibus I (in force 18 March 2026) amending Directive (EU) 2022/2464",
+        "url": "https://eur-lex.europa.eu/"
+      },
       "confidence": "reported",
-      "verified": "2026-10-24"
+      "verified": "2026-10-24",
+      "slug": "eu-csrd-omnibus-scope-2026",
+      "actions": [
+        "Roughly 80% of companies that were in scope are no longer in scope. Re-check before spending another rupee on a reporting programme.",
+        "Listed SMEs are out of scope entirely, and the CS3D phased rollout was abolished.",
+        "If you remain in scope, the standards are unchanged. If you have been removed, document why, in case a customer asks."
+      ]
     }
   ]
 }

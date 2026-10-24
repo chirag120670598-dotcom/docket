@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{META}}">
+<link rel="canonical" href="{{CANONICAL}}">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{META}}">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23151311'/><path d='M11 8h10M16 8v10M16 18l-4 7M16 18l4 7' stroke='%23f0a020' stroke-width='2.2' stroke-linecap='round' fill='none'/></svg>">
+<script type="application/ld+json">{{JSONLD}}</script>
+<style>
+{{CSS}}
+</style>
+<style>
+  .crumb { font-size: 13px; margin: 0 0 6px; color: var(--ink-3); }
+  .crumb a { color: var(--ink-3); text-decoration: none; border-bottom: 1px dotted var(--ink-3); }
+  .crumb a:hover { color: var(--accent); border-color: var(--accent); }
+  .bigdate {
+    font-size: 34px; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .bigdate.upcoming { color: var(--accent); }
+  .bigdate.live { color: var(--live); }
+  .whenline { font-family: var(--mono); font-size: 13px; color: var(--ink-3); margin: 0 0 22px; }
+  h2.sec {
+    font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--ink-3); margin: 30px 0 10px; font-weight: 700;
+  }
+  .do { margin: 0; padding-left: 20px; font-size: 15px; color: var(--ink-2); }
+  .do li { margin-bottom: 8px; }
+  .do li b { color: var(--ink); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+  .tag {
+    font-size: 12.5px; padding: 3px 10px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-2);
+  }
+  .cta {
+    display: block; margin: 34px 0 0; padding: 20px 22px; border-radius: var(--radius);
+    background: var(--card); border: 1px solid var(--line); text-decoration: none; color: inherit;
+  }
+  .cta:hover { border-color: var(--accent); }
+  .cta b { display: block; font-size: 16px; margin-bottom: 4px; color: var(--ink); }
+  .cta span { font-size: 14px; color: var(--ink-2); }
+  .related a { display: block; padding: 11px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 15px; }
+  .related a:last-child { border-bottom: 0; }
+  .related a:hover { color: var(--accent); }
+  .related small { display: block; color: var(--ink-3); font-size: 12.5px; font-family: var(--mono); margin-top: 2px; }
+  .warn {
+    border-left: 3px solid var(--accent); background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 0 9px 9px 0; font-size: 14px; color: var(--ink-2);
+    margin: 20px 0 0;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="crumb"><a href="../">Docket</a> · {{JURISDICTION}} · {{REGIME}}</p>
+    <h1>{{HEADLINE}}</h1>
+    <p class="bigdate {{STATUS}}">{{DATE}}</p>
+    <p class="whenline">{{WHEN}} · last checked {{VERIFIED}}</p>
+    <p class="lede">{{SUMMARY}}</p>
+  </header>
+
+  {{PENALTY_BLOCK}}
+
+  <h2 class="sec">Who this applies to</h2>
+  <div class="tags">{{APPLIES}}</div>
+
+  <h2 class="sec">What to do about it</h2>
+  <ul class="do">{{ACTIONS}}</ul>
+
+  <h2 class="sec">Source</h2>
+  <p><a href="{{SOURCE_URL}}" target="_blank" rel="noopener noreferrer">{{SOURCE_LABEL}}</a>
+     &nbsp;<span class="conf {{CONFIDENCE}}">{{CONFIDENCE_LABEL}}</span></p>
+
+  {{WARN}}
+
+  <a class="cta" href="../{{APP_HASH}}">
+    <b>See every deadline that applies to you →</b>
+    <span>Answer three questions and Docket returns the full list for your company,
+    with the penalties and the sources, sorted by what is nearest.</span>
+  </a>
+
+  <h2 class="sec">Related deadlines</h2>
+  <div class="related">{{RELATED}}</div>
+
+  <footer>
+    <h2>This is a scoping aid, not legal advice</h2>
+    <p>
+      It tells you what to read and by when. It cannot tell you whether your
+      product, activity or contract falls inside a definition — that is a legal
+      question about facts only you have. Penalty figures are the statutory
+      maxima, not predictions.
+    </p>
+    <p>
+      <a href="../">Docket</a> · <a href="../changes.html">what has moved and when</a> ·
+      <a href="https://github.com/chirag120670598-dotcom/docket">source</a>
+    </p>
+  </footer>
+</div>
+</body>
+</html>
