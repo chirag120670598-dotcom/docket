@@ -138,7 +138,7 @@ git clone https://github.com/chirag120670598-dotcom/docket
 cd docket
 
 python3 -m docket deadlines --market EU --product software   # no install needed
-python3 tools/build.py && open dist/index.html               # build the site
+python3 tools/build.py && open site/index.html               # build the site
 python3 -m unittest discover -s tests -t .                   # 97 tests
 node tools/render_test.js                                    # 43 DOM checks
 ```

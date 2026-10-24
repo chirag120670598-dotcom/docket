@@ -27,7 +27,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docket" / "data" / "deadlines.json"
 TEMPLATE = ROOT / "web" / "template.html"
-OUT = ROOT / "dist" / "index.html"
+OUT = ROOT / "site" / "index.html"
 
 JURISDICTIONS = {"EU", "IN", "US-CA", "UK", "GLOBAL"}
 PRODUCTS = {"connected_device", "software", "ai_system", "physical_goods", "services"}

@@ -30,10 +30,10 @@ jobs:
           python tools/build.py
       - name: Site is self-contained
         run: |
-          if grep -q "<script src=" dist/index.html; then
-            echo "external script found in dist/index.html"; exit 1
+          if grep -q "<script src=" site/index.html; then
+            echo "external script found in site/index.html"; exit 1
           fi
-          test -s dist/index.html
+          test -s site/index.html
 
   render:
     runs-on: ubuntu-latest

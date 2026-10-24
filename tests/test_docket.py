@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docket" / "data" / "deadlines.json"
-DIST = ROOT / "dist" / "index.html"
+DIST = ROOT / "site" / "index.html"
 
 import sys
 sys.path.insert(0, str(ROOT / "tools"))

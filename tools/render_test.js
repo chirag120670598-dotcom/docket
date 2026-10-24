@@ -3,7 +3,7 @@
  * Render the built page in a real DOM and drive it the way a visitor would.
  *
  * Checking that the HTML parses is not the same as checking that the product
- * works. This loads dist/index.html in jsdom, clicks the actual buttons, and
+ * works. This loads site/index.html in jsdom, clicks the actual buttons, and
  * asserts on what appears in the results pane — so a broken filter, a broken
  * hash round-trip, or a template that silently lost its event listeners fails
  * here rather than in front of a user.
@@ -14,7 +14,7 @@ const fs = require("fs");
 const path = require("path");
 const { JSDOM } = require("jsdom");
 
-const HTML = path.join(__dirname, "..", "dist", "index.html");
+const HTML = path.join(__dirname, "..", "site", "index.html");
 const failures = [];
 let checks = 0;
 
