@@ -46,6 +46,10 @@ CONFIDENCE = {"primary", "reported"}
 
 STALE_DAYS = 120
 
+# Hosted at /<key>.txt so Bing and Yandex will accept submissions without an
+# account. Stable on purpose: rotating it would invalidate the hosted proof.
+INDEXNOW_KEY = "7f3c1a9e4b6d8f2c5a0e9d3b7c1f4a68"
+
 JURIS_LABEL = {"EU": "European Union", "IN": "India", "US-CA": "California",
                "UK": "United Kingdom", "GLOBAL": "Global"}
 PRODUCT_LABEL = {"connected_device": "connected hardware", "software": "software",
@@ -514,10 +518,12 @@ def build(check_only: bool = False) -> int:
         "User-agent: *\nAllow: /\n\n"
         f"Sitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    # IndexNow ownership proof. See tools/submit.py.
+    (OUT / f"{INDEXNOW_KEY}.txt").write_text(INDEXNOW_KEY, encoding="utf-8")
 
     upcoming = sum(1 for r in rows if r["status"] == "upcoming")
     total = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
-    print(f"wrote {len(rows) + 4} files to site/ — "
+    print(f"wrote {len(rows) + 5} files to site/ — "
           f"{total / 1024:.0f} KB, {upcoming} upcoming, {len(rows) - upcoming} in force")
     print(f"  index.html {len(index_html) / 1024:.1f} KB · "
           f"{len(rows)} regime pages · changes.html · deadlines.ics "

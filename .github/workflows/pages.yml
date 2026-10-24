@@ -49,3 +49,15 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.13" }
+      - name: Tell search engines the pages exist
+        # Free, no account, and it runs after the new files are live so the
+        # submitted URLs actually resolve. IndexNow is a notification, not a
+        # guarantee of indexing — Bing and Yandex use it, Google does not.
+        continue-on-error: true
+        run: |
+          python tools/build.py
+          sleep 20
+          python tools/submit.py
