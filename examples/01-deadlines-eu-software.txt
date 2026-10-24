@@ -1,0 +1,40 @@
+# Captured from: python3 -m docket deadlines --market EU --product software --size small
+# Generated 2026-10-24. Dates are absolute, so this stays readable as a record.
+
+7 deadline(s) apply
+
+  UPCOMING     in 39d  2026-12-02  AI Act
+                       Article 50(2) transition period ends — AI content marking
+                       Regulation (EU) 2024/1689, Article 50(2) and Article 113
+                       Penalty: €15m or 3% of worldwide turnover.
+
+  UPCOMING     in 46d  2026-12-09  Product Liability Directive
+                       New product liability regime applies — software becomes a product
+                       Directive (EU) 2024/2853, Article 31 (transposition)
+                       Penalty: Civil liability, not administrative fines — but the disclosure duties and the presumption of defectiveness are…
+
+  UPCOMING     in 80d  2027-01-12  Data Act
+                       Cloud switching charges are abolished
+                       Regulation (EU) 2023/2854, Article 29 (through Article 50)
+                       Penalty: Member State penalties.
+
+  UPCOMING    in 413d  2027-12-11  Cyber Resilience Act
+                       Article 64 penalties become applicable
+                       Regulation (EU) 2024/2847, Articles 64 and 71(2)
+                       Penalty: €15m or 2.5% (Annex I, Articles 13 and 14); €10m or 2%; €5m or 1%.
+
+  IN FORCE    43d ago  2026-09-11  Cyber Resilience Act
+                       Article 14 reporting duty goes live
+                       Regulation (EU) 2024/2847, Article 14 and Article 71(2)
+                       Penalty: Article 64 fine tier applies from 11 December 2027: up to €15m or 2.5% of worldwide turnover. Until then the e…
+
+  IN FORCE    5mo ago  2026-06-07  Pay Transparency Directive
+                       Member States must transpose the Pay Transparency Directive
+                       Directive (EU) 2023/970, Article 30
+                       Penalty: Member State penalties, including fines and orders to remedy.
+
+  IN FORCE   8.4y ago  2018-05-25  GDPR
+                       Breach notification — 72 hours from awareness
+                       Regulation (EU) 2016/679, Articles 33 and 34
+                       Penalty: Up to €20m or 4% of worldwide annual turnover.
+

@@ -1,0 +1,25 @@
+# Captured from the Article 14(7) cascade. Each block is one fact pattern.
+
+## 1. EU establishment, cybersecurity decisions taken in Germany
+File with the CSIRT of Germany (DE).
+Basis: Article 14(7), first subparagraph — main establishment.
+The decisions on the cybersecurity of the product are predominantly taken in this Member State.
+
+## 2. Main establishment unclear, headcount decides it
+File with the CSIRT of Germany (DE).
+Basis: Article 14(7), first subparagraph — highest number of employees.
+Main establishment could not be determined, so the establishment with the highest number of employees in the Union decides it (120 employees).
+
+## 3. No EU establishment: representative beats importer
+File with the CSIRT of Netherlands (NL).
+Basis: Article 14(7)(a) — authorised representative.
+No main establishment in the Union, and no closer qualifying authorised representative was supplied, so the Member State of the authorised representative handling the highest number of products governs (12).
+
+## 4. No EU establishment at all: user base is the last resort, and sticks
+File with the CSIRT of France (FR).
+Basis: Article 14(7)(d) — highest number of users.
+No main establishment in the Union, and no closer qualifying user base was supplied, so the Member State of the user base handling the highest number of products governs (900).
+Note: because jurisdiction was fixed by user location, Article 14(7) lets you submit subsequent notifications to this same CSIRT rather than re-deriving it each time.
+
+## 5. Refusing to guess when the facts cannot decide it
+No CSIRT can be named yet. Missing: authorised representative in the Union (or importer, distributor, or user locations).

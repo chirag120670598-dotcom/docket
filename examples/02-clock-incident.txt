@@ -1,0 +1,10 @@
+# Captured from: python3 -m docket clock --path incident --aware "5h ago"
+
+incident path · aware at 2026-10-24T06:47+00:00
+
+  early warning  2026-10-25 06:47 UTC            due in 19.0 h
+                 Article 14(4)(a)
+  notification   2026-10-27 06:47 UTC          due in 2.8 days
+                 Article 14(4)(b)
+  final          2026-11-26 06:47 UTC         due in 32.8 days
+                 Article 14(4)(c) — one month after the incident notification was submitted (assumes submission at the 72-hour mark)

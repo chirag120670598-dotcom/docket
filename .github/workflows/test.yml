@@ -1,0 +1,72 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # The dataset rots. Check weekly so staleness surfaces without anyone
+    # having to remember.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Dataset validates and site builds
+        run: |
+          python tools/build.py --check
+          python tools/build.py
+      - name: Site is self-contained
+        run: |
+          if grep -q "<script src=" dist/index.html; then
+            echo "external script found in dist/index.html"; exit 1
+          fi
+          test -s dist/index.html
+
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.13" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: python tools/build.py
+      - run: npm install jsdom
+      - name: Drive the page in a real DOM
+        run: node tools/render_test.js
+
+  data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.13" }
+      - name: Every deadline must still be verifiable
+        run: python -m docket check
+      - name: A wrong date is the one failure this project cannot survive
+        run: |
+          python - <<'PY'
+          import json, sys
+          from datetime import date
+          rows = json.load(open("docket/data/deadlines.json"))["deadlines"]
+          today = date.today()
+          from datetime import datetime
+          stale = [r["id"] for r in rows
+                   if (today - datetime.strptime(r["verified"], "%Y-%m-%d").date()).days > 120]
+          print(f"{len(rows)} entries, {len(stale)} stale")
+          for s in stale:
+              print(f"::warning::stale dataset entry: {s}")
+          PY

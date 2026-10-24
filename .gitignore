@@ -1,0 +1,9 @@
+dist/
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+build/
+*.egg-info/
+.DS_Store
+.vercel

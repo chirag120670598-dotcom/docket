@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docket — every compliance deadline that applies to you</title>
+<meta name="description" content="Answer three questions and see exactly which EU, Indian and California compliance deadlines bind your company, when, with what penalty, and with a link to the instrument itself. Free, no login, no tracking.">
+<meta property="og:title" content="Docket — every compliance deadline that applies to you">
+<meta property="og:description" content="Three questions. Every deadline that binds you. Each one with a source.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23151311'/><path d='M11 8h10M16 8v10M16 18l-4 7M16 18l4 7' stroke='%23f0a020' stroke-width='2.2' stroke-linecap='round' fill='none'/></svg>">
+<style>
+  :root {
+    --ink: #151311;
+    --ink-2: #4a443e;
+    --ink-3: #7d756c;
+    --line: #e2ddd6;
+    --paper: #fbf9f6;
+    --card: #ffffff;
+    --accent: #b45309;
+    --accent-soft: #fdf3e3;
+    --live: #0f766e;
+    --live-soft: #ecfdf5;
+    --soon: #b45309;
+    --far: #57534e;
+    --radius: 14px;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #f5f2ee; --ink-2: #bdb6ad; --ink-3: #8a827a;
+      --line: #322d28; --paper: #12100e; --card: #1b1815;
+      --accent: #f0a020; --accent-soft: #2a2013;
+      --live: #34d399; --live-soft: #10231d;
+      --soon: #f0a020; --far: #a8a29e;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px 100px; }
+
+  header { padding: 56px 0 8px; }
+  .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  h1 { font-size: 30px; letter-spacing: -0.02em; margin: 0; font-weight: 700; }
+  .brand .mark { color: var(--accent); font-family: var(--mono); font-size: 22px; }
+  .stamp { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .lede { font-size: 19px; line-height: 1.5; color: var(--ink-2); margin: 18px 0 0; max-width: 700px; }
+
+  .hook {
+    margin: 26px 0 0; padding: 16px 18px; border-left: 3px solid var(--accent);
+    background: var(--accent-soft); border-radius: 0 10px 10px 0; max-width: 760px;
+  }
+  .hook p { margin: 0 0 10px; font-size: 14.5px; color: var(--ink-2); }
+  .hook p:last-child { margin-bottom: 0; }
+  .hook strong { color: var(--ink); }
+
+  .panel {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 22px 6px; margin: 34px 0 0;
+  }
+  .q { margin: 0 0 20px; }
+  .q > label {
+    display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  button.chip {
+    font: inherit; font-size: 14.5px; cursor: pointer;
+    border: 1px solid var(--line); background: transparent; color: var(--ink-2);
+    padding: 8px 15px; border-radius: 999px; transition: all .13s ease;
+  }
+  button.chip:hover { border-color: var(--ink-3); color: var(--ink); }
+  button.chip[aria-pressed="true"] {
+    background: var(--ink); border-color: var(--ink); color: var(--paper); font-weight: 600;
+  }
+  .hint { font-size: 13px; color: var(--ink-3); margin: -4px 0 20px; }
+
+  .toolbar {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; margin: 40px 0 14px;
+  }
+  .count { font-size: 15px; color: var(--ink-2); }
+  .count b { color: var(--ink); font-size: 19px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  button.ghost {
+    font: inherit; font-size: 13.5px; cursor: pointer; color: var(--ink-2);
+    background: transparent; border: 1px solid var(--line); border-radius: 8px;
+    padding: 7px 13px;
+  }
+  button.ghost:hover { border-color: var(--ink-3); color: var(--ink); }
+
+  .item {
+    background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--line);
+    border-radius: 10px; padding: 18px 20px; margin-bottom: 10px;
+  }
+  .item.upcoming { border-left-color: var(--accent); }
+  .item.live { border-left-color: var(--live); }
+  .top { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .regime {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .when { font-family: var(--mono); font-size: 12.5px; white-space: nowrap; }
+  .when.upcoming { color: var(--accent); font-weight: 700; }
+  .when.live { color: var(--live); }
+  .title { font-size: 17px; font-weight: 650; margin: 5px 0 7px; letter-spacing: -0.01em; }
+  .summary { font-size: 14.5px; color: var(--ink-2); margin: 0 0 10px; }
+  .penalty {
+    font-size: 13.5px; color: var(--ink-2); background: var(--accent-soft);
+    border-radius: 7px; padding: 8px 12px; margin: 0 0 10px;
+  }
+  .penalty b { color: var(--ink); }
+  .foot { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 12.5px; }
+  .foot a { color: var(--ink-3); text-decoration: none; border-bottom: 1px dotted var(--ink-3); }
+  .foot a:hover { color: var(--accent); border-color: var(--accent); }
+  .conf { font-family: var(--mono); font-size: 11px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--line); color: var(--ink-3); }
+  .conf.primary { color: var(--live); border-color: color-mix(in srgb, var(--live) 40%, transparent); }
+  .empty { text-align: center; color: var(--ink-3); padding: 50px 20px; border: 1px dashed var(--line); border-radius: 10px; }
+
+  footer { margin-top: 60px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--ink-3); }
+  footer h2 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
+  footer p { margin: 0 0 12px; max-width: 760px; }
+  footer code { font-family: var(--mono); font-size: 12.5px; background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
+
+  .support {
+    margin-top: 54px; padding: 24px 24px 20px; border: 1px solid var(--line);
+    border-radius: var(--radius); background: var(--card);
+  }
+  .support h2 {
+    font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-3); margin: 0 0 12px; font-weight: 700;
+  }
+  .support p { margin: 0 0 12px; font-size: 14.5px; color: var(--ink-2); max-width: 760px; }
+  .pay {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin: 14px 0 16px; padding: 12px 14px; border-radius: 9px;
+    background: var(--accent-soft); border: 1px solid var(--line);
+  }
+  .paylabel {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .pay code {
+    font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--ink);
+    background: transparent; padding: 0; user-select: all;
+  }
+  .pay button { margin-left: auto; }
+  .fineprint { font-size: 13px; color: var(--ink-3); max-width: 760px; }
+
+  @media (max-width: 620px) {
+    header { padding-top: 36px; }
+    h1 { font-size: 25px; }
+    .lede { font-size: 16.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <span class="mark">▣</span>
+      <h1>Docket</h1>
+      <span class="stamp" id="built"></span>
+    </div>
+    <p class="lede">
+      Three questions. Then every compliance deadline that actually binds your
+      company — with the date, the penalty, and a link to the instrument itself.
+      No login, no tracking, nothing leaves your browser.
+    </p>
+
+    <div class="hook">
+      <p>
+        <strong>Why a deadline list is worth nothing unless someone re-reads the law.</strong>
+        The AI Act's high-risk obligations were due on 2 August 2026. They are now due
+        on 2 December 2027, because the Digital Omnibus on AI — Regulation (EU)
+        2026/1744 — was published on 24 July 2026 and entered into force three days
+        later. Any calendar built before that date is now confidently wrong, and the
+        people hurt by it are the ones who planned around it.
+      </p>
+      <p>
+        That is the whole job. Not scraping dates, but re-reading the instrument and
+        dating the moment it changed.
+      </p>
+    </div>
+  </header>
+
+  <section class="panel" aria-label="About your company">
+    <div class="q">
+      <label id="l-markets">Where do you sell, operate or employ people?</label>
+      <div class="chips" role="group" aria-labelledby="l-markets" data-group="markets"></div>
+    </div>
+    <div class="q">
+      <label id="l-products">What do you put on the market?</label>
+      <div class="chips" role="group" aria-labelledby="l-products" data-group="products"></div>
+    </div>
+    <div class="q">
+      <label id="l-size">How many people work for you?</label>
+      <div class="chips" role="group" aria-labelledby="l-size" data-group="size"></div>
+    </div>
+    <p class="hint" id="hint">Pick at least one market and one thing you make.</p>
+  </section>
+
+  <div class="toolbar">
+    <div class="count" id="count"></div>
+    <div class="actions">
+      <button class="ghost" id="ics">Download .ics</button>
+      <button class="ghost" id="share">Copy link</button>
+    </div>
+  </div>
+
+  <main id="results" aria-live="polite"></main>
+
+  <section class="support" aria-labelledby="l-support">
+    <h2 id="l-support">Who pays for this</h2>
+    <p>
+      Nobody, at the moment. There is no paid tier, no advertising, no tracking
+      pixel, no email gate, and no investor to answer to. Hosting costs nothing
+      and the code is open. <strong>The expensive part is the data</strong> — every
+      one of the 23 regimes here has to be re-read against its own instrument, and
+      a date that quietly moves is the one failure this page cannot survive.
+    </p>
+    <p>
+      So the ask is narrow. If this page told you about a deadline you did not know
+      you had, and roughly what it would have cost you to find that out from a
+      consultant, that is the size of the donation that keeps the next one current.
+      If you are a one-person company with no obligations under any of this, take a
+      copy of the calendar and pay nothing — you are not the person this is asking
+      anything of.
+    </p>
+    <div class="pay">
+      <span class="paylabel">UPI</span>
+      <code id="upi">chirag120670598-1@oksbi</code>
+      <button class="ghost" id="copyupi" type="button">Copy</button>
+    </div>
+    <p class="fineprint">
+      Donations are voluntary gifts and buy nothing — no support contract, no
+      priority, no advice, no say over what gets added. Because nothing here is
+      gated, a donation cannot buy you access you do not already have.
+    </p>
+    <p class="fineprint">
+      The more useful thing you can do costs nothing: send this page to the one
+      person at your company who owns compliance, with their own answers already
+      in the URL. The <em>Copy link</em> button above copies your answers, not
+      just the address.
+    </p>
+  </section>
+
+  <footer>
+    <h2>How this works, and what it is not</h2>
+    <p>
+      Every entry names the instrument it comes from and the date it was last
+      checked. <span class="conf primary">primary</span> means the legal text
+      itself was read. <span class="conf">reported</span> means a secondary
+      source was read and the instrument was not. Where a date has moved because
+      of a later amendment, the amendment is named in the source line — the AI
+      Act high-risk dates, for instance, are the ones set by the Digital Omnibus
+      on AI, not the original Act.
+    </p>
+    <p>
+      <strong>This is a scoping aid, not legal advice.</strong> It tells you what
+      to read and by when. It cannot tell you whether a particular product,
+      activity or contract falls inside a definition — that is a legal question
+      about facts only you have. Penalty figures are the statutory maxima, not
+      predictions, and many regimes set penalties at national level after
+      publication.
+    </p>
+    <p>
+      Coverage is deliberate rather than exhaustive: EU digital and product law,
+      Indian labour and data law, and California packaging. A regime is added
+      when the instrument can be read, not when a summary of it can be found.
+      Missing a regime you need? Open an issue — that is how the list grows.
+    </p>
+    <p>
+      Built from <code>data/deadlines.json</code>. Every deadline in the list above
+      is a row in that file — no date on this page is typed into the HTML. The same
+      dataset drives a command line tool, so the page and the terminal can never
+      drift apart:
+      <code>docket deadlines --market EU --product software --size small</code>,
+      <code>docket clock --path incident --aware "3h ago"</code>,
+      <code>docket route --main-establishment DE</code>.
+    </p>
+    <p>
+      The Article 14 clock and the Article 14(7) addressee logic are the part of
+      this that is not just a list. If you have to file a CRA report, the
+      <em>which CSIRT</em> question has a right answer and almost nobody writes it
+      down. <a href="https://github.com/chirag120670598-dotcom/docket">The source is on GitHub</a>.
+    </p>
+  </footer>
+</div>
+
+<script id="docket-data" type="application/json">/*__DOCKET_DATA__*/</script>
+<script>
+(function () {
+  "use strict";
+  const DATA = JSON.parse(document.getElementById("docket-data").textContent);
+
+  const MARKET_LABELS = { "EU": "European Union", "IN": "India", "US-CA": "California" };
+  const PRODUCT_LABELS = {
+    "connected_device": "Connected hardware",
+    "software": "Software / SaaS",
+    "ai_system": "An AI system",
+    "physical_goods": "Physical goods",
+    "services": "Services only",
+  };
+  const SIZE_LABELS = { micro: "1–9", small: "10–49", medium: "50–249", large: "250+" };
+
+  const state = { markets: new Set(), products: new Set(), size: null };
+
+  // Roles are derived from what you make, not asked separately — a fourth
+  // question buys nothing and loses completions.
+  //
+  // Note that software makers are "manufacturers" in EU product law: the CRA
+  // places obligations on the manufacturer of a product with digital elements,
+  // and the 2024 Product Liability Directive makes software a product outright.
+  // Treating a SaaS company as anything other than a manufacturer quietly hides
+  // the CRA from exactly the people it was written for.
+  function rolesFor() {
+    const r = new Set(["employer"]);
+    if (state.products.has("connected_device") || state.products.has("physical_goods")) {
+      r.add("manufacturer"); r.add("importer");
+    }
+    if (state.products.has("software") || state.products.has("ai_system")) {
+      r.add("provider"); r.add("manufacturer");
+    }
+    if (state.products.has("ai_system")) r.add("deployer");
+    if (state.products.has("services")) r.add("provider");
+    return r;
+  }
+
+  function applies(e) {
+    const a = e.applies_if;
+    if (!a.markets.some((m) => state.markets.has(m))) return false;
+    if (!a.products.some((p) => state.products.has(p))) return false;
+    if (state.size && !a.sizes.includes(state.size)) return false;
+    const roles = rolesFor();
+    if (!a.roles.some((r) => roles.has(r))) return false;
+    return true;
+  }
+
+  function fmtDate(iso) {
+    const d = new Date(iso + "T00:00:00Z");
+    return d.toLocaleDateString("en-GB", {
+      day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+    });
+  }
+
+  function whenLabel(e) {
+    if (e.days === 0) return "TODAY";
+    if (e.days > 0) return e.days === 1 ? "TOMORROW" : e.days + " DAYS LEFT";
+    const n = Math.abs(e.days);
+    if (n < 60) return "IN FORCE " + n + "D";
+    if (n < 730) return "IN FORCE " + Math.round(n / 30) + "MO";
+    return "IN FORCE " + (n / 365).toFixed(1) + "Y";
+  }
+
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function renderChips() {
+    document.querySelectorAll(".chips").forEach((box) => {
+      const group = box.dataset.group;
+      box.textContent = "";
+      if (group === "size") {
+        Object.entries(SIZE_LABELS).forEach(([k, label]) => {
+          const b = el("button", "chip", label);
+          b.type = "button";
+          b.setAttribute("aria-pressed", String(state.size === k));
+          b.onclick = () => { state.size = k; sync(); };
+          box.appendChild(b);
+        });
+        return;
+      }
+      const labels = group === "markets" ? MARKET_LABELS : PRODUCT_LABELS;
+      Object.entries(labels).forEach(([k, label]) => {
+        const b = el("button", "chip", label);
+        b.type = "button";
+        b.setAttribute("aria-pressed", String(state[group].has(k)));
+        b.onclick = () => {
+          if (state[group].has(k)) state[group].delete(k);
+          else state[group].add(k);
+          sync();
+        };
+        box.appendChild(b);
+      });
+    });
+  }
+
+  function render() {
+    const ready = state.markets.size > 0 && state.products.size > 0;
+    const host = document.getElementById("results");
+    host.textContent = "";
+
+    if (!ready) {
+      document.getElementById("count").textContent = "";
+      document.getElementById("hint").hidden = false;
+      const box = el("div", "empty", "Answer the questions above and the list appears here.");
+      host.appendChild(box);
+      return;
+    }
+    document.getElementById("hint").hidden = true;
+
+    const hits = DATA.deadlines.filter(applies);
+    const upcoming = hits.filter((e) => e.status === "upcoming");
+    const live = hits.filter((e) => e.status === "live");
+
+    const c = document.getElementById("count");
+    c.textContent = "";
+    c.appendChild(el("b", null, String(hits.length)));
+    c.appendChild(document.createTextNode(
+      hits.length === 1 ? " deadline applies" : " deadlines apply"));
+    if (upcoming.length) {
+      c.appendChild(document.createTextNode(
+        " · " + upcoming.length + " still ahead of you"));
+    }
+
+    if (!hits.length) {
+      host.appendChild(el("div", "empty",
+        "Nothing in the current dataset matches that combination. That is a real answer, not an error — but it may also mean a regime is missing. Open an issue."));
+      return;
+    }
+
+    upcoming.concat(live).forEach((e) => {
+      const item = el("div", "item " + e.status);
+
+      const top = el("div", "top");
+      top.appendChild(el("span", "regime", e.regime + " · " + e.jurisdiction));
+      top.appendChild(el("span", "when " + e.status, whenLabel(e)));
+      item.appendChild(top);
+
+      item.appendChild(el("h3", "title", e.title));
+
+      const meta = el("div", "regime", fmtDate(e.date));
+      meta.style.marginBottom = "8px";
+      item.appendChild(meta);
+
+      item.appendChild(el("p", "summary", e.summary));
+
+      if (e.penalty) {
+        const p = el("p", "penalty");
+        p.appendChild(el("b", null, "Penalty: "));
+        p.appendChild(document.createTextNode(e.penalty));
+        item.appendChild(p);
+      }
+
+      const foot = el("div", "foot");
+      const a = el("a", null, "Source: " + e.source.label);
+      a.href = e.source.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      foot.appendChild(a);
+      const conf = el("span", "conf " + e.confidence,
+        e.confidence === "primary" ? "primary source" : "reported");
+      conf.title = e.confidence === "primary"
+        ? "The legal instrument itself was read."
+        : "A secondary source was read; the instrument was not.";
+      foot.appendChild(conf);
+      foot.appendChild(el("span", "conf", "checked " + e.verified));
+      item.appendChild(foot);
+
+      host.appendChild(item);
+    });
+  }
+
+  function toHash() {
+    const p = new URLSearchParams();
+    if (state.markets.size) p.set("m", [...state.markets].join(","));
+    if (state.products.size) p.set("p", [...state.products].join(","));
+    if (state.size) p.set("s", state.size);
+    return "#" + p.toString();
+  }
+
+  function fromHash() {
+    const p = new URLSearchParams(location.hash.slice(1));
+    const m = p.get("m"), pr = p.get("p"), s = p.get("s");
+    if (m) m.split(",").filter((x) => x in MARKET_LABELS).forEach((x) => state.markets.add(x));
+    if (pr) pr.split(",").filter((x) => x in PRODUCT_LABELS).forEach((x) => state.products.add(x));
+    if (s && s in SIZE_LABELS) state.size = s;
+  }
+
+  function sync() {
+    history.replaceState(null, "", toHash());
+    renderChips();
+    render();
+  }
+
+  function icsText() {
+    const hits = DATA.deadlines.filter(applies);
+    const pad = (n) => String(n).padStart(2, "0");
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    const lines = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Docket//compliance deadlines//EN",
+      "CALSCALE:GREGORIAN", "X-WR-CALNAME:Docket compliance deadlines",
+    ];
+    hits.forEach((e) => {
+      const d = e.date.replace(/-/g, "");
+      const next = new Date(e.date + "T00:00:00Z");
+      next.setUTCDate(next.getUTCDate() + 1);
+      const end = next.toISOString().slice(0, 10).replace(/-/g, "");
+      const esc = (s) => String(s).replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
+      lines.push(
+        "BEGIN:VEVENT",
+        "UID:" + e.id + "@docket",
+        "DTSTAMP:" + stamp,
+        "DTSTART;VALUE=DATE:" + d,
+        "DTEND;VALUE=DATE:" + end,
+        "SUMMARY:" + esc(e.regime + " — " + e.title),
+        "DESCRIPTION:" + esc(e.summary + "\n\nPenalty: " + (e.penalty || "—")
+          + "\nSource: " + e.source.label + "\n" + e.source.url)
+          .slice(0, 900),
+        "TRANSP:TRANSPARENT",
+        "END:VEVENT");
+    });
+    lines.push("END:VCALENDAR");
+    return lines.join("\r\n");
+  }
+
+  document.getElementById("ics").onclick = () => {
+    const blob = new Blob([icsText()], { type: "text/calendar;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "docket-deadlines.ics";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
+
+  document.getElementById("share").onclick = async () => {
+    const btn = document.getElementById("share");
+    try {
+      await navigator.clipboard.writeText(location.origin + location.pathname + toHash());
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Copy failed — use the URL bar";
+    }
+    setTimeout(() => { btn.textContent = "Copy link"; }, 2000);
+  };
+
+  document.getElementById("copyupi").onclick = async () => {
+    const btn = document.getElementById("copyupi");
+    try {
+      await navigator.clipboard.writeText(document.getElementById("upi").textContent);
+      btn.textContent = "Copied";
+    } catch (_) {
+      btn.textContent = "Select it above";
+    }
+    setTimeout(() => { btn.textContent = "Copy"; }, 2000);
+  };
+
+  document.getElementById("built").textContent =
+    "as of " + DATA.built + " · " + DATA.deadlines.length + " tracked";
+
+  fromHash();
+  renderChips();
+  render();
+  window.addEventListener("hashchange", () => {
+    state.markets.clear(); state.products.clear(); state.size = null;
+    fromHash(); renderChips(); render();
+  });
+})();
+</script>
+</body>
+</html>

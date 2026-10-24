@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docket-compliance"
+version = "1.0.0"
+description = "Compliance deadlines that actually bind you, and the CRA Article 14 filing clock."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Chirag" }]
+keywords = [
+  "compliance", "deadlines", "cyber-resilience-act", "cra", "ai-act",
+  "gdpr", "nis2", "eu", "article-14", "csirt", "regulatory",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Legal Industry",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Office/Business",
+  "Topic :: Security",
+]
+dependencies = []
+
+[project.scripts]
+docket = "docket.cli:main"
+
+[project.optional-dependencies]
+test = []
+
+[project.urls]
+Homepage = "https://github.com/chirag120670598-dotcom/docket"
+Issues = "https://github.com/chirag120670598-dotcom/docket/issues"
+
+[tool.setuptools]
+packages = ["docket"]
+
+[tool.setuptools.package-data]
+docket = ["data/*.json"]
