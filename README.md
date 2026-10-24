@@ -1,5 +1,11 @@
 # Docket
 
+[![test](https://github.com/chirag120670598-dotcom/docket/actions/workflows/test.yml/badge.svg)](https://github.com/chirag120670598-dotcom/docket/actions/workflows/test.yml)
+[![pages](https://github.com/chirag120670598-dotcom/docket/actions/workflows/pages.yml/badge.svg)](https://chirag120670598-dotcom.github.io/docket/)
+[![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
+### **[Open the site →](https://chirag120670598-dotcom.github.io/docket/)**
+
 **Every compliance deadline that binds your company, dated, priced and sourced — and the Cyber Resilience Act Article 14 filing clock that most summaries get wrong.**
 
 [Docket the website](https://github.com/chirag120670598-dotcom/docket) · `python3 tools/build.py` · zero dependencies
